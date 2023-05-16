@@ -1,1 +1,1 @@
-# Summer23
+# CSU Statistics Undergrad Research Summer '23

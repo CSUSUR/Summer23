@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
                       root.dir =
                         "C:/Users/16189/Desktop/UGR_Summer2023/ReproducibleResearch/")
 ```
-
+### Example code chunk
 ```{r}
 # Load in libraries
 library(tidyverse)

@@ -18,17 +18,17 @@ CleanData = function(data, filepath, filename) {
            TMAX = ((TMAX * 9/5) / 10) + 32)
   
   # Save clean data as csv with "[city]-temps.csv" convention
-  write.csv(clean_weather, paste(filepath, filename),
+  write.csv(clean_weather, paste0(filepath, filename),
             row.names = FALSE)
   
 }
 
 ##Minnesota---------------------------------------------------------------------
 # Load in data
-raw_weather = read.csv("/Data/USW00014922.csv")
+raw_weather = read.csv("GroupPresentations/Week3/Data/USW00014922.csv")
 
 # Set filepath
-filepath = "/Data/"
+filepath = "GroupPresentations/Week3/Data/"
 
 # Set filename
 filename = "stpaul-temps.csv"
@@ -37,10 +37,10 @@ CleanData(raw_weather, filepath, filename)
 
 ##Urbana------------------------------------------------------------------------
 # Load in data
-raw_weather = read.csv("/Data/USC00118740.csv")
+raw_weather = read.csv("GroupPresentations/Week3/Data/USC00118740.csv")
 
 # Set filepath
-filepath = "/Data/"
+filepath = "GroupPresentations/Week3/Data/"
 
 # Set filename
 filename = "urbana-temps.csv"

@@ -15,7 +15,8 @@ CleanData = function(data, filepath, filename) {
     pivot_wider(names_from = element, values_from = value) %>%
     select(date, TMIN, TMAX) %>% 
     mutate(TMIN = ((TMIN * 9/5) / 10) + 32,
-           TMAX = ((TMAX * 9/5) / 10) + 32)
+           TMAX = ((TMAX * 9/5) / 10) + 32) %>%
+    remove_missing()
   
   # Save clean data as csv with "[city]-temps.csv" convention
   write.csv(clean_weather, paste0(filepath, filename),

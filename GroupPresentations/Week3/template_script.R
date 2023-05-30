@@ -25,10 +25,10 @@ CleanData = function(data, filepath, filename) {
 
 ##Minnesota---------------------------------------------------------------------
 # Load in data
-raw_weather = read.csv("../ReproducibleResearch/Data/USW00014922.csv")
+raw_weather = read.csv("/Data/USW00014922.csv")
 
 # Set filepath
-filepath = "../ReproducibleResearch/Data/"
+filepath = "/Data/"
 
 # Set filename
 filename = "stpaul-temps.csv"
@@ -37,10 +37,10 @@ CleanData(raw_weather, filepath, filename)
 
 ##Urbana------------------------------------------------------------------------
 # Load in data
-raw_weather = read.csv("../ReproducibleResearch/Data/USC00118740.csv")
+raw_weather = read.csv("/Data/USC00118740.csv")
 
 # Set filepath
-filepath = "../ReproducibleResearch/Data/"
+filepath = "/Data/"
 
 # Set filename
 filename = "urbana-temps.csv"

@@ -1,5 +1,5 @@
 ---
-title: "Data Exploration: U.S. City Daily High Temperautes"
+title: "Data Exploration: U.S. City Daily High Temperatures"
 output: pdf_document
 ---
 

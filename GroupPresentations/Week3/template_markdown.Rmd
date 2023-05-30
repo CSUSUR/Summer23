@@ -10,20 +10,13 @@ output: pdf_document
 - root.dir = "": Sets the root directory for the document. When loading in data or images, the path will automatically be set to the root directory. 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
-                      root.dir =
-                        "C:/Users/16189/Desktop/UGR_Summer2023/ReproducibleResearch/")
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
 ### Example code chunk
 ```{r}
 # Load in libraries
 library(tidyverse)
 library(stringr)
-
-# Source user functions
-source("Functions/CreateTempHistogram.R")
-source("Functions/GetDayTemp.R")
-
 
 # Get specific date's historical TMINs and TMAXs
 GetDayTemp = function(data) {
@@ -33,6 +26,18 @@ GetDayTemp = function(data) {
   return(filtered_data)
 }
 
+# Create a histogram for an input location
+CreateTempHistogram = function(data, location) {
+  current_day = Sys.Date()
+  current_day = str_remove(current_day, "2023-")
+  hist = ggplot(data) +
+    geom_histogram(aes(TMAX), bins = 15) +
+    theme_classic() +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    ggtitle(location)
+
+  return(hist)
+}
 
 # Read in temperature data for St. Paul and Urbana
 stpaul_data = read.csv("Data/stpaul-temps.csv")

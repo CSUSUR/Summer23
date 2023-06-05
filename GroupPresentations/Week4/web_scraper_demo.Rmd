@@ -1,0 +1,120 @@
+---
+title: "web scraper demo"
+author: "brayden look"
+date: ""
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rvest)
+library(httr)
+
+##WARNING: This markdown file will take at least 20 seconds to knit; let it take its time, nothing is broken.##
+```
+
+Getting the advanced table for Steph Curry
+
+```{r}
+url <- "https://www.basketball-reference.com/players/c/curryst01.html"
+headers = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) 
+            AppleWebKit/537.36 (KHTML, like Gecko) 
+            Chrome/105.0.0.0 Safari/537.36"
+
+#point at the webpage
+document <- GET(url, user_agent(headers))
+
+#access the document and make it readable
+html <- document %>% 
+    read_html() 
+
+#use the table id to access a specific element
+table <- html %>% html_node("#advanced")
+
+#convert the element into a dataframe
+advanced_data <- table %>% html_table()
+
+advanced_data
+```
+
+
+Getting all tables for Steph Curry
+
+```{r}
+#grab all tables from the page
+table <- html %>% html_nodes("table")
+
+#convert the element into a dataframe
+all_data <- table %>% html_table()
+```
+
+
+Attempting to get each player's unique identifier link
+
+```{r}
+url <- "https://www.basketball-reference.com/players/a/"
+
+#point at the webpage
+document <- GET(url)
+
+#access the document and make it readable
+html <- document %>% 
+    read_html() 
+
+#use the table id to access a specific element
+table <- html %>% html_node("table")
+
+#convert the element into a dataframe
+player_data <- table %>% html_table()
+
+head(player_data)
+```
+
+Correct way to get identifiers
+
+```{r}
+links <- html %>% html_node("table") %>% html_nodes("th") %>%
+                    html_nodes("a") %>% html_attr("href")
+```
+
+Code to get every active player's advanced table (set to only get 4 players so that it doesn't run for a long time)
+
+```{r}
+#get advanced stats for every player
+url_base = "https://www.basketball-reference.com/players/"
+headers = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) 
+            AppleWebKit/537.36 (KHTML, like Gecko) 
+            Chrome/105.0.0.0 Safari/537.36"
+
+links <- c()
+
+#get all active player's with last names that start with A and store their links
+for (letter in letters[1]){
+  url = paste(url_base, letter, sep = "")
+  document <- GET(url, user_agent(url))
+  html <- document %>%  read_html()
+ 
+  #find all links (hrefs) stored in text (a) that is bolded (strong) in the main column (th) of the table
+  links <- c(links, html %>% html_node("table") %>% 
+               html_nodes("th") %>%  html_nodes("strong") %>% 
+               html_nodes("a") %>% html_attr("href"))
+ 
+  #pause for 4 seconds after each request so that we don't get kicked out
+  Sys.sleep(4)
+}
+
+url_base = "https://www.basketball-reference.com"
+data_frames = list()
+#get the first 4 player's advanced data
+for (link in links[1:4]){
+  url = paste(url_base, link, sep = "")
+  document <- GET(url)
+  html <- document %>%  read_html()
+  table <- html %>% html_node("#advanced")
+  data <- table %>% html_table()
+  
+  data_frames <- append(data_frames, list(data))
+  
+  Sys.sleep(4)
+}
+```

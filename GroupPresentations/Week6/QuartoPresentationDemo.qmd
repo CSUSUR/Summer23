@@ -1,0 +1,58 @@
+---
+title: "Quarto Presentation Demo"
+format: 
+  revealjs:
+    theme: simple
+editor: visual
+---
+
+## Install Quarto
+
+-   Quarto is compatible with popular tools such as RStudio, VS Code, and Jupyter Notebook. To get started, download Quarto [here](https://quarto.org/docs/get-started/).
+
+-   After installing, you can get started making a presentation in the tool of your choice. For this demo we will be using RStudio.
+
+-   There are great resources for presentation [tutorials](https://quarto.org/docs/presentations/).
+
+## Getting Started
+
+-   To get started making a presentation, simply create a new Quarto Presentation file (qmd) which is an option in the RStudio file drop down box.
+
+    ![](Images/open.png)
+
+## Type of Slides
+
+-   When a new .qmd file is created, you will get the following pop-up with options to select
+
+    ![](Images/options.png){width="300"}
+
+-   Making a [reavljs](https://quarto.org/docs/presentations/revealjs/) presentation is recommended for maximum functionality.
+
+## Creating slides
+
+-   Quarto has the benefit of having both a visual mode and a source mode that you can switch between.
+
+    -   Visual mode: The way things will look on the slides, more like a Word interface
+
+    -   Source: Think RMarkdown, just source code
+
+-   You can edit in both of these modes depending on your preference.
+
+## Creating slides
+
+-   The reavljs tutorial linked in the previous slides has great customization examples
+
+-   Basics:
+
+    -   Create a new slide with '##Slide_Title'
+
+    -   Add a code block just like RMarkdown in Source mode or by selecting 'Code Cell/R' under the Insert drop down in Visual Mode.
+
+    -   Add an image just like RMarkdown in Source mode or by selecting the picture icon in Visual Mode (a lot more user friendly!)
+
+## Saving as pdf
+
+1.  Open html version of presentation
+2.  In the URL, add '?print-pdf'
+    -   http://localhost:4249/?print-pdf/
+3.  Print to pdf
